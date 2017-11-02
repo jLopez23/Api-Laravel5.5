@@ -31,7 +31,7 @@ class ArticleController extends Controller
         return response()->json($article, 200);
     }
 
-    public function delete(Article $article)
+    public function destroy(Article $article)
     {
         $article->delete();
 

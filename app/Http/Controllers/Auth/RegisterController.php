@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -23,14 +24,7 @@ class RegisterController extends Controller
     use RegistersUsers;
 
 
-    protected function registered(Request $request, $user)
-    {
-        $user->generateToken();
-
-        return response()->json(['data' => $user->toArray()], 201);
-    }
-
-    /**
+      /**
      * Where to redirect users after registration.
      *
      * @var string
@@ -46,6 +40,20 @@ class RegisterController extends Controller
     {
         $this->middleware('guest');
     }
+
+    /**
+    * The user has been registered.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @param  mixed  $user
+    * @return mixed
+    */
+   protected function registered(Request $request, $user)
+   {
+       $user->generateToken();
+       return response()->json(['data' => $user->toArray()], 201);
+   }
+
 
     /**
      * Get a validator for an incoming registration request.
